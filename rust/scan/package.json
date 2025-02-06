@@ -1,0 +1,14 @@
+{
+     "name": "@rust/scan",
+     "version": "1.0.0",
+     "description": "This action uses Grype for source code analysis.",
+     "main": "index.js",
+     "repository": {
+          "type": "git",
+          "url": "https://github.com/astraly-labs/workflows",
+          "directory": "rust/scan"
+     },
+     "private": false,
+     "author": "Astraly Labs",
+     "license": "UNLICENSED"
+}

@@ -1,0 +1,37 @@
+name:  Rust Clippy
+description: Rust Linting using Clippy
+author: 'Yezz123'
+inputs:
+  manifest_dir:
+    description: 'Rust Manifest Directory'
+    required: false
+    default: '.'
+  token:
+    description: 'Github token to annotate files with findings'
+    required: true
+
+runs:
+  using: composite
+  steps:
+
+    - uses: actions-rs/toolchain@b2417cde72dcf67f306c0ae8e0828a81bf0b189f
+      with:
+        toolchain: stable
+        components: clippy
+
+    - name: Set Job Metadata
+      shell: bash
+      id: meta
+      env:
+        manifest_dir: ${{ inputs.manifest_dir }}
+      run: $GITHUB_ACTION_PATH/scripts/set-env.sh
+
+    - uses: Swatinem/rust-cache@81d053bdb0871dcd3f10763c8cc60d0adc41762b # v1
+
+    - uses: actions-rs/clippy-check@b5b5f21f4797c02da247df37026fcd0a5024aa4d # v1
+      continue-on-error: true
+      with:
+        token: ${{ inputs.token }}
+        # Explicitly report all findings as warnings to not fail the reporiting status check
+        args: --manifest-path ${{ steps.meta.outputs.manifest_path }} -- -W clippy::correctness -W clippy::cargo -W clippy::suspicious -W clippy::style
+        name: Rust Clippy Report

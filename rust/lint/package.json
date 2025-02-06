@@ -1,0 +1,14 @@
+{
+     "name": "@rust/lint",
+     "version": "1.0.0",
+     "description": "This action uses Rust Clippy for code quality checks",
+     "main": "index.js",
+     "repository": {
+          "type": "git",
+          "url": "https://github.com/astraly-labs/workflows",
+          "directory": "rust/lint"
+     },
+     "private": false,
+     "author": "Astraly Labs",
+     "license": "UNLICENSED"
+}

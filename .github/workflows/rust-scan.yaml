@@ -1,0 +1,30 @@
+name: Rust Scanner
+
+on:
+  workflow_call:
+    secrets:
+      token:
+        required: false
+
+jobs:
+  scanner:
+    permissions:
+      # required for all workflows
+      security-events: write
+      checks: write
+      pull-requests: write
+      # only required for workflows in private repositories
+      actions: read
+      contents: read
+    runs-on: ubuntu-latest
+    name: Rust Code Scanning checks
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Rust Scanner
+        uses: ./rust/scan
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          codeql_upload: false
