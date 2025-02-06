@@ -45,7 +45,11 @@ runs:
       env:
         DIR: ${{ inputs.dir }}
         ASSET_PREFIX: ${{ inputs.asset_prefix }}
-      run: $GITHUB_ACTION_PATH/scripts/scan-metadata.sh
+      run: |
+        chmod +x $GITHUB_ACTION_PATH/scripts/scan-metadata.sh
+
+        # Set metadata for scan job
+        $GITHUB_ACTION_PATH/scripts/scan-metadata.sh
 
     # Don't fail during report generation
     - name: Vulnerability analysis of SBOM
