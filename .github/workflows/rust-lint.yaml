@@ -24,6 +24,6 @@ jobs:
         with:
           fetch-depth: 0
       - name: Rust Lint
-        uses: ./rust/lint
+        uses: astraly-labs/workflows/rust/lint@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

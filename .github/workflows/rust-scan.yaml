@@ -24,7 +24,6 @@ jobs:
         with:
           fetch-depth: 0
       - name: Rust Scanner
-        uses: ./rust/scan
+        uses: astraly-labs/workflows/rust/scan@main
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           codeql_upload: false
