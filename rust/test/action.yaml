@@ -1,0 +1,46 @@
+name: Rust Test Coverage
+description: Rust Test Coverage using cargo-llvm-cov and nextest
+author: 'Yezz123'
+inputs:
+  fail_ci:
+    description: 'Fail CI if coverage upload fails'
+    required: false
+    default: false
+    type: choice
+    options:
+    - 'true'
+    - 'false'
+  token:
+    description: 'Codecov token'
+    required: false
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Rust toolchain
+      shell: bash
+      run: rustup show
+
+    - name: Install cargo-llvm-cov
+      uses: taiki-e/install-action@cargo-llvm-cov
+
+    - name: Install nextest
+      uses: taiki-e/install-action@nextest
+
+    - name: Clean workspace
+      shell: bash
+      run: cargo llvm-cov clean --workspace
+
+    - name: Setup Rust cache
+      uses: Swatinem/rust-cache@v2
+
+    - name: Run tests with coverage
+      shell: bash
+      run: cargo llvm-cov nextest --release --lcov --output-path lcov.info
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        files: lcov.info
+        token: ${{ inputs.token }}
+        fail_ci_if_error: ${{ inputs.fail_ci }}
