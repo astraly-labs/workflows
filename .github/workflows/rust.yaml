@@ -13,3 +13,6 @@ jobs:
   Scan:
     uses: astraly-labs/workflows/.github/workflows/rust-scan.yaml@main
     secrets: inherit
+  Test:
+    uses: astraly-labs/workflows/.github/workflows/rust-test.yaml@main
+    secrets: inherit

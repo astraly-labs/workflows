@@ -1,0 +1,27 @@
+name: Rust Test
+
+on:
+  workflow_call:
+    secrets:
+      codecov_token:
+        required: false
+
+jobs:
+  test:
+    permissions:
+      # required for all workflows
+      security-events: write
+      checks: write
+      pull-requests: write
+      # only required for workflows in private repositories
+      actions: read
+      contents: read
+    runs-on: ubuntu-latest
+    name: Rust Test Coverage
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Rust Test
+        uses: astraly-labs/workflows/rust/test@main

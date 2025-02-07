@@ -1,0 +1,14 @@
+{
+     "name": "@rust/test",
+     "version": "1.0.0",
+     "description": "This action runs Rust tests with code coverage using cargo-llvm-cov and nextest",
+     "main": "index.js",
+     "repository": {
+          "type": "git",
+          "url": "https://github.com/astraly-labs/workflows",
+          "directory": "rust/test"
+     },
+     "private": false,
+     "author": "Astraly Labs",
+     "license": "UNLICENSED"
+}
