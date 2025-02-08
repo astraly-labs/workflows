@@ -1,4 +1,4 @@
-name:  Rust Clippy
+name: Rust Clippy
 description: Rust Linting using Clippy
 author: 'Yezz123'
 inputs:
@@ -13,7 +13,6 @@ inputs:
 runs:
   using: composite
   steps:
-
     - uses: actions-rs/toolchain@b2417cde72dcf67f306c0ae8e0828a81bf0b189f
       with:
         toolchain: stable
@@ -26,8 +25,6 @@ runs:
         manifest_dir: ${{ inputs.manifest_dir }}
       run: |
         chmod +x $GITHUB_ACTION_PATH/scripts/set-env.sh
-
-        # Set metadata for scan job
         $GITHUB_ACTION_PATH/scripts/set-env.sh
 
     - uses: Swatinem/rust-cache@81d053bdb0871dcd3f10763c8cc60d0adc41762b # v1
@@ -36,6 +33,10 @@ runs:
       continue-on-error: true
       with:
         token: ${{ inputs.token }}
-        # Explicitly report all findings as warnings to not fail the reporiting status check
-        args: --manifest-path ${{ steps.meta.outputs.manifest_path }} -- -W clippy::correctness -W clippy::cargo -W clippy::suspicious -W clippy::style
+        args: >
+          --manifest-path ${{ steps.meta.outputs.manifest_path }}
+          -- -D warnings
+          -W clippy::all
+          -W clippy::pedantic
+          -W clippy::nursery
         name: Rust Clippy Report
