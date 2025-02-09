@@ -35,8 +35,9 @@ runs:
         token: ${{ inputs.token }}
         args: >
           --manifest-path ${{ steps.meta.outputs.manifest_path }}
+          --locked
+          --all-targets
+          --all-features
           -- -D warnings
-          -W clippy::all
-          -W clippy::pedantic
-          -W clippy::nursery
+          --no-deps
         name: Rust Clippy Report
