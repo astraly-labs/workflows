@@ -36,7 +36,7 @@ runs:
 
     - name: Run tests with coverage
       shell: bash
-      run: cargo llvm-cov nextest --release --lcov --output-path lcov.info
+      run: cargo llvm-cov nextest --release --profile ci --lcov --output-path lcov.info
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
