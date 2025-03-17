@@ -33,6 +33,27 @@ runs:
 
     - name: Setup Rust cache
       uses: Swatinem/rust-cache@v2
+      with:
+        # Cache all targets
+        targets: all
+        # Cache debug and release builds
+        profile: all
+        # Cache dependencies
+        shared-key: "cargo-deps"
+        # Cache the registry
+        registry: true
+        # Cache git dependencies
+        git: true
+        # Cache the target directory
+        target-dir: target
+        # Cache the cargo home directory
+        cargo-home: ~/.cargo
+        # Cache the rustup home directory
+        rustup-home: ~/.rustup
+        # Cache the cargo registry
+        registry-cache: ~/.cargo/registry
+        # Cache the cargo git directory
+        git-cache: ~/.cargo/git
 
     - name: Run tests with coverage
       shell: bash
