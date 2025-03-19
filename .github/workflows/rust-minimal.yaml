@@ -1,0 +1,14 @@
+name: Astraly Labs
+
+run-name: Pragma CI Minimal
+
+on:
+  workflow_call:
+
+jobs:
+  Lint:
+    uses: astraly-labs/workflows/.github/workflows/rust-lint.yaml@main
+    secrets: inherit
+  Scan:
+    uses: astraly-labs/workflows/.github/workflows/rust-scan.yaml@main
+    secrets: inherit
